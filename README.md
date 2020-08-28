@@ -1,2 +1,2 @@
 # IIEC Specialist in python
-All the programs and solution for Specialist in Python course by Vimal daga sir.
+All the solution of tasks given in Specialist in Python course by Vimal daga sir.
