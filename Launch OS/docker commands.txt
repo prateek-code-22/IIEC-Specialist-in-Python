@@ -1,0 +1,7 @@
+SOME DOCKER COMMANDS:
+1. docker ps -- to view how many os is currently running. 
+2. for launching OS -- "docker run -i -t --name myos unbuntu : 14 .04"
+3.launch OS and remain in same OS(localhost) on terminal:   "docker run -d -i -t --name myos unbuntu : 14 .04"
+4. -i -t --> new terminal after installtion
+   -d --> launch OS in background and remain in same OS(local host base OS / In same terminal). 
+5. docker stop myos -- to stop your OS(here myos is example).
