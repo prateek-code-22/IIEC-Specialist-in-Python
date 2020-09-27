@@ -1,5 +1,5 @@
 # IIEC Specialist in python
-All the solutions/Programs given in Specialist in Python course by Vimal daga sir.
+All the Tasks/Programs given in Specialist in Python course by Vimal daga sir.
 
 ## This repository contains:
 1. **Menu based python program** to open different softwares and applications on your system.
