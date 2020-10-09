@@ -1,54 +1,39 @@
-# COMMANDS TO ACTION PAGE:
+#!/usr/bin/python3
 
-#! /usr/bin/python3
-print("Content-type: index/html")
+print("content-type: text/html")
 print()
 
-import os
-import subprocess
+import subprocess as sp
 import cgi 
 
-command = cgi.FieldStorage()
-value = command.getvalue('command')
+form = cgi.FieldStorage()
 
-query = value
-query = query.lower()
+osname = form.getvalue("x")
+imageName = form.getvalue("i")
 
-# START COMMANDS HERE:
-if ("run" in query) or ("open" in query) or ("launch" in query) or ("enable" in query):
-    
-    if ("docker" in query) or ("container" in query):
-        ret = subprocess.getoutput('sudo systemctl start docker')
-        print("DOCKER SERVICE STARTED...")
-        
-    elif ("firewall" in query) or ("firewalld" in query):
-        ret = subprocess.getoutput("sudo systemctl start firewalld")
-        print("FIREWALL STARTED...")
-        
-    elif "date" in query:
-        ret = subprocess.getoutput("date")
-        print(ret)
-    
-    elif "calender" in query:
-        ret = subprocess.getoutput("cal")
-        print(ret)
+cmd = "sudo docker run -i -t --name {0} {1}".format(osname,imageName)
 
-    elif "ifconfig" in query:
-        ret = subprocess.getoutput("ifconfig")
-        print(ret)
-    
-    
-# STOP COMMANDS HERE:
-elif ("shut" in  query) or ("stop" in query) or ("disable" in query):
-    
-    if ("docker" in query) or ("container" in query):
-        ret = subprocess.getoutput('sudo systemctl stop docker')
-        print("DOCKER SERVICES STOPPED...")
+op = sp.getstatusoutput(cmd)
 
-    elif ("firewall" in query) or ("firewalld" in query):
-        ret = subprocess.getoutput('sudo systemctl stop firewalld')
-        print("FIREWALL STOPPED...")
-        
+print("OS Name: ",osname)
+print("OS Image Name:",imageName)
+
+status = op[0]
+out = op[1]
+
+if status== 0:
+	print("OS launched {} ...".format(osname))
 else:
-    print("Sorry! please check your Command again")
+	print("Error occured: ")
+	print("\n")
 
+
+
+
+
+''' USE OF FORMAT()IN PRINT.
+example to use input data in cmd query
+x= 45
+print("turn iron to {0} degree".format(x)) 
+O/P - turn to 45 degree
+'''
