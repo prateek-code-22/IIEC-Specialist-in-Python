@@ -1,39 +1,54 @@
-#!/usr/bin/python3
+# COMMANDS TO ACTION PAGE:
 
-print("content-type: text/html")
+#! /usr/bin/python3
+print("Content-type: index/html")
 print()
 
-import subprocess as sp
+import os
+import subprocess
 import cgi 
 
-form = cgi.FieldStorage()
+command = cgi.FieldStorage()
+value = command.getvalue('command')
 
-osname = form.getvalue("x")
-imageName = form.getvalue("i")
+query = value
+query = query.lower()
 
-cmd = "sudo docker run -i -t --name {0} {1}".format(osname,imageName)
+# START COMMANDS HERE:
+if ("run" in query) or ("open" in query) or ("launch" in query) or ("enable" in query):
+    
+    if ("docker" in query) or ("container" in query):
+        ret = subprocess.getoutput('sudo systemctl start docker')
+        print("DOCKER SERVICE STARTED...")
+        
+    elif ("firewall" in query) or ("firewalld" in query):
+        ret = subprocess.getoutput("sudo systemctl start firewalld")
+        print("FIREWALL STARTED...")
+        
+    elif "date" in query:
+        ret = subprocess.getoutput("date")
+        print(ret)
+    
+    elif "calender" in query:
+        ret = subprocess.getoutput("cal")
+        print(ret)
 
-op = sp.getstatusoutput(cmd)
+    elif "ifconfig" in query:
+        ret = subprocess.getoutput("ifconfig")
+        print(ret)
+    
+    
+# STOP COMMANDS HERE:
+elif ("shut" in  query) or ("stop" in query) or ("disable" in query):
+    
+    if ("docker" in query) or ("container" in query):
+        ret = subprocess.getoutput('sudo systemctl stop docker')
+        print("DOCKER SERVICES STOPPED...")
 
-print("OS Name: ",osname)
-print("OS Image Name:",imageName)
-
-status = op[0]
-out = op[1]
-
-if status== 0:
-	print("OS launched {} ...".format(osname))
+    elif ("firewall" in query) or ("firewalld" in query):
+        ret = subprocess.getoutput('sudo systemctl stop firewalld')
+        print("FIREWALL STOPPED...")
+        
 else:
-	print("Error occured: ")
-	print("\n")
+    print("Sorry! please check your Command again")
 
-
-
-
-
-''' USE OF FORMAT()IN PRINT.
-example to use input data in cmd query
-x= 45
-print("turn iron to {0} degree".format(x)) 
-O/P - turn to 45 degree
-'''
