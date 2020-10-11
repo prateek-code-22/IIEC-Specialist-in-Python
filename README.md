@@ -1,5 +1,5 @@
 # IIEC Specialist in python
-All the Tasks/Programs given in Specialist in Python course by Vimal daga sir.
+This repository contains all the Tasks/Programs given in Specialist in Python course by Vimal daga sir.
 
 ## This repository contains:
 1. [Menu based python program](https://github.com/prateek-code-22/IIEC-Specialist-in-Python/blob/master/program.ipynb) to open different softwares and applications on your system using text queries.
